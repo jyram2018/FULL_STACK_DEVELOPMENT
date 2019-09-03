@@ -1,1 +1,15 @@
 const JSX = <h1>Hello JSX!</h1>;
+
+// React: Create a Complex JSX Element
+
+const JSX = (
+    <div>
+        <h1>Hello</h1>
+        <p>Some text</p>
+        <ul>
+            <li>A</li>
+            <li>B</li>
+            <li>C</li>
+        </ul>
+    </div>
+);
