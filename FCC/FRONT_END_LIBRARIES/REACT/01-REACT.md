@@ -1,7 +1,5 @@
-It's worth noting that under the hood the challenges are calling the following syntax.
-```javascript
-ReactDOM.render(JSX, document.getElementById('root'))
-```
+Note: The challenges are realised in FCC environment with the following syntax called: ```ReactDOM.render(JSX, document.getElementById('root'));```.
+
 **1. React: Create a Simple JSX Element**
 ```javascript
 const JSX = <h1>Hello JSX!</h1>;
