@@ -1,3 +1,4 @@
+```javascript
 const JSX = (
   <div>
     {/*Comment*/}
@@ -5,3 +6,4 @@ const JSX = (
     <p>Here's a subtitle</p>
   </div>
 );
+```
