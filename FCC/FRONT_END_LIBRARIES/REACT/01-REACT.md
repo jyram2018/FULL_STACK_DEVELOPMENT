@@ -1,3 +1,5 @@
+# REACT
+
 Note: The challenges are realised in FCC environment with the following syntax called: ```ReactDOM.render(JSX, document.getElementById('root'));```.
 
 **1. React: Create a Simple JSX Element**
@@ -7,21 +9,21 @@ const JSX = <h1>Hello JSX!</h1>;
 **2. React: Create a Complex JSX Element**
 ```javascript
 const JSX = (
-    <div>
-        <h1>Hello</h1>
-        <p>Some text</p>
-        <ul>
-            <li>A</li>
-            <li>B</li>
-            <li>C</li>
-        </ul>
-    </div>
+	<div>
+		<h1>Hello</h1>
+		<p>Some text</p>
+		<ul>
+			<li>A</li>
+			<li>B</li>
+			<li>C</li>
+		</ul>
+	</div>
 );
 ```
 **3. React: Add Comments in JSX**
 ```javascript
 const JSX = (
-  <div>
+	<div>
     {/*Comment*/}
     <h1>This is a block of JSX</h1>
     <p>Here's a subtitle</p>
