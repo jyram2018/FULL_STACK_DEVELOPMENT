@@ -68,6 +68,270 @@ const JSX = (
   </div>
 );
 ```
+**7. React: Create a Stateless Functional Component**
+```javascript
+const MyComponent = function() {
+  // change code below this line
+  return (
+    <div>
+      Hello
+    </div>
+  );
+  // change code above this line
+}
+```
+**8. React: Create a React Component**
+
+The constructor is a special method used during the initialization of objects that are created with the class keyword.
+It is best practice to call a component's constructor with super, and pass props to both.
+This makes sure the component is initialized properly.
+
+```javascript
+class MyComponent extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    // change code below this line
+    return (
+      <div>
+        <h1>
+          Hello React!
+        </h1>
+      </div>
+    );
+    // change code above this line
+  }
+};
+```
+**9. React: Create a Component with Composition**
+
+When React encounters a custom HTML tag that references another component 
+(a component name wrapped in < /> like in this example), 
+it renders the markup for that component in the location of the tag. 
+
+```javascript
+const ChildComponent = () => {
+  return (
+    <div>
+      <p>I am the child</p>
+    </div>
+  );
+};
+
+class ParentComponent extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    return (
+      <div>
+        <h1>I am the parent</h1>
+        { /* change code below this line */ }
+        <ChildComponent />
+
+        { /* change code above this line */ }
+      </div>
+    );
+  }
+};
+```
+**10. React: Use React to Render Nested Components**
+```javascript
+const TypesOfFruit = () => {
+  return (
+    <div>
+      <h2>Fruits:</h2>
+      <ul>
+        <li>Apples</li>
+        <li>Blueberries</li>
+        <li>Strawberries</li>
+        <li>Bananas</li>
+      </ul>
+    </div>
+  );
+};
+
+const Fruits = () => {
+  return (
+    <div>
+      { /* change code below this line */ }
+      <TypesOfFruit/>
+      { /* change code above this line */ }
+    </div>
+  );
+};
+
+class TypesOfFood extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
+    return (
+      <div>
+        <h1>Types of Food:</h1>
+        { /* change code below this line */ }
+        <Fruits/>
+        { /* change code above this line */ }
+      </div>
+    );
+  }
+};
+```
+** **
+```javascript
+```
+** **
+```javascript
+```
+** **
+```javascript
+```
+** **
+```javascript
+```
+** **
+```javascript
+```
+** **
+```javascript
+```
+** **
+```javascript
+```
+** **
+```javascript
+```
+** **
+```javascript
+```
+** **
+```javascript
+```
+** **
+```javascript
+```
+** **
+```javascript
+```
+** **
+```javascript
+```
+** **
+```javascript
+```
+** **
+```javascript
+```
+** **
+```javascript
+```
+** **
+```javascript
+```
+** **
+```javascript
+```
+** **
+```javascript
+```
+** **
+```javascript
+```
+** **
+```javascript
+```
+** **
+```javascript
+```
+** **
+```javascript
+```
+** **
+```javascript
+```
+** **
+```javascript
+```
+** **
+```javascript
+```
+** **
+```javascript
+```
+** **
+```javascript
+```
+** **
+```javascript
+```
+** **
+```javascript
+```
+** **
+```javascript
+```
+** **
+```javascript
+```
+** **
+```javascript
+```
+** **
+```javascript
+```
+** **
+```javascript
+```
+** **
+```javascript
+```
+** **
+```javascript
+```
+** **
+```javascript
+```
+** **
+```javascript
+```
+** **
+```javascript
+```
+** **
+```javascript
+```
+** **
+```javascript
+```
+** **
+```javascript
+```
+** **
+```javascript
+```
+** **
+```javascript
+```
+** **
+```javascript
+```
+** **
+```javascript
+```
+** **
+```javascript
+```
+** **
+```javascript
+```
+** **
+```javascript
+```
+** **
+```javascript
+```
 ** **
 ```javascript
 ```
