@@ -522,8 +522,25 @@ Its ```state``` is completely encapsulated, or local to that component, unless y
 This notion of encapsulated ```state``` is very important because it allows you to write certain logic, then have that logic contained and isolated in one place in your code.
 
 ```javascript
+class MyComponent extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      name: 'freeCodeCamp'
+    }
+  }
+  render() {
+    return (
+      <div>
+        { /* change code below this line */ }
+        <h1>{this.state.name}</h1>
+        { /* change code above this line */ }
+      </div>
+    );
+  }
+};
 ```
-**23. **
+**23. React: Render State in the User Interface Another Way**
 ```javascript
 ```
 **24. **
