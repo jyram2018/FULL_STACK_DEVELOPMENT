@@ -249,112 +249,332 @@ class TypesOfFood extends React.Component {
 // change code below this line
 ReactDOM.render(<TypesOfFood/>, document.getElementById('challenge-node'));
 ```
-** **
+**13. React: Write a React Component from Scratch**
+
+A typical React component is an ES6 class which extends React.Component.
+It has a render method that returns HTML (from JSX) or null.
+This is the basic form of a React component.
+
+```javascript
+// change code below this line
+class MyComponent extends React.Component {
+  constructor(props) {
+    super(props)
+  }
+  render () {
+    return (
+      <div>
+        <h1>My First React Component!</h1>
+      </div>
+    )
+  }
+}
+ReactDOM.render(<MyComponent/>, document.getElementById('challenge-node'));
+```
+**14. React: Pass Props to a Stateless Functional Component**
+```javascript
+
+const CurrentDate = (props) => {
+  return (
+    <div>
+      { /* change code below this line */ }
+      <p>The current date is: {props.date} </p>
+      { /* change code above this line */ }
+    </div>
+  );
+};
+
+class Calendar extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    return (
+      <div>
+        <h3>What date is it?</h3>
+        { /* change code below this line */ }
+        <CurrentDate date={Date()}/>
+        { /* change code above this line */ }
+      </div>
+    );
+  }
+};
+```
+**15. React: Pass an Array as Props**
+```javascript
+const List= (props) => {
+  { /* change code below this line */ }
+  return <p>{props.tasks.join(", ")}</p>
+  { /* change code above this line */ }
+};
+
+class ToDo extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    return (
+      <div>
+        <h1>To Do Lists</h1>
+        <h2>Today</h2>
+        { /* change code below this line */ }
+        <List tasks = {["walk dog", "workout"]}/>
+        <h2>Tomorrow</h2>
+        <List tasks = {["walk dog", "workout", "shooping"]}/>
+        { /* change code above this line */ }
+      </div>
+    );
+  }
+};
+```
+**16. React: Use Default Props**
+```javascript
+const ShoppingCart = (props) => {
+  return (
+    <div>
+      <h1>Shopping Cart Component</h1>
+    </div>
+  )
+};
+// change code below this line
+ShoppingCart.defaultProps = { items: 0 }
+```
+**17. React: Override Default Props**
+```javascript
+const Items = (props) => {
+  return <h1>Current Quantity of Items in Cart: {props.quantity}</h1>
+}
+
+Items.defaultProps = {
+  quantity: 0
+}
+
+class ShoppingCart extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    { /* change code below this line */ }
+    return <Items quantity = {10}/>
+    { /* change code above this line */ }
+  }
+};
+```
+**18. React: Use PropTypes to Define the Props You Expect**
+
+React provides useful type-checking features to verify that components receive props of the correct type.
+For example, your application makes an API call to retrieve data that you expect to be in an array, which is then passed to a component as a prop. 
+
+Note: As of React v15.5.0, PropTypes is imported independently from React, like this:
+```import React, { PropTypes } from 'react';```
+
+```javascript
+const Items = (props) => {
+  return <h1>Current Quantity of Items in Cart: {props.quantity}</h1>
+};
+
+// change code below this line
+Items.propTypes = {
+  quantity: PropTypes.number.isRequired
+};
+// change code above this line
+
+Items.defaultProps = {
+  quantity: 0
+};
+
+class ShoppingCart extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    return <Items />
+  }
+};
+```
+**19. React: Access Props Using this.props**
+
+Anytime you refer to a class component within itself, you use the this keyword.
+To access props within a class component, you preface the code that you use to access it with this.
+For example, if an ES6 class component has a prop called data, you write ```{this.props.data}``` in JSX.
+
+```javascript
+class ReturnTempPassword extends React.Component {
+  constructor(props) {
+    super(props);
+
+  }
+  render() {
+    return (
+        <div>
+            { /* change code below this line */ }
+            <p>Your temporary password is: <strong>{this.props.tempPassword}</strong></p>
+            { /* change code above this line */ }
+        </div>
+    );
+  }
+};
+
+class ResetPassword extends React.Component {
+  constructor(props) {
+    super(props);
+
+  }
+  render() {
+    return (
+        <div>
+          <h2>Reset Password</h2>
+          <h3>We've generated a new temporary password for you.</h3>
+          <h3>Please reset this password from your account settings ASAP.</h3>
+          { /* change code below this line */ }
+          <ReturnTempPassword tempPassword = {"lolololol"}/>
+          { /* change code above this line */ }
+        </div>
+    );
+  }
+};
+```
+**20. React: Review Using Props with Stateless Functional Components**
+
+A stateless functional component is any function you write which accepts props and returns JSX.
+A stateless component, on the other hand, is a class that extends ```React.Component```,
+but does not use internal state (covered in the next challenge).
+Finally, a stateful component is any component that does maintain its own internal state.
+You may see stateful components referred to simply as components or React components.
+
+A common pattern is to try to minimize statefulness and to create stateless functional components wherever possible.
+This helps contain your state management to a specific area of your application.
+In turn, this improves development and maintenance of your app by making it easier to follow how changes to state affect its behavior.
+
+```javascript
+class CampSite extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    return (
+      <div>
+        <Camper/>
+      </div>
+    );
+  }
+};
+// change code below this line
+class Camper extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    return (
+      <p>
+        {this.props.name}
+      </p>
+    )
+  }
+}
+
+Camper.defaultProps = {
+  name: 'CamperBot'
+};
+
+Camper.propTypes = {
+  name: PropTypes.string.isRequired
+};
+```
+**21. React: Create a Stateful Component**
+
+State consists of any data your application needs to know about, that can change over time.
+You want your apps to respond to state changes and present an updated UI when necessary.
+
+You create state in a React component by declaring a state property on the component class in its constructor.
+This initializes the component with state when it is created.
+The state property must be set to a JavaScript object. Declaring it looks like this:
+
+    this.state = {
+      // describe your state here
+    }
+
 ```javascript
 ```
-** **
+**22. **
 ```javascript
 ```
-** **
+**23. **
 ```javascript
 ```
-** **
+**24. **
 ```javascript
 ```
-** **
+**25. **
 ```javascript
 ```
-** **
+**26. **
 ```javascript
 ```
-** **
+**27. **
 ```javascript
 ```
-** **
+**28. **
 ```javascript
 ```
-** **
+**29. **
 ```javascript
 ```
-** **
+**30. **
 ```javascript
 ```
-** **
+**31. **
 ```javascript
 ```
-** **
+**32. **
 ```javascript
 ```
-** **
+**33. **
 ```javascript
 ```
-** **
+**34. **
 ```javascript
 ```
-** **
+**35. **
 ```javascript
 ```
-** **
+**36. **
 ```javascript
 ```
-** **
+**37. **
 ```javascript
 ```
-** **
+**38. **
 ```javascript
 ```
-** **
+**39. **
 ```javascript
 ```
-** **
+**40 **
 ```javascript
 ```
-** **
+**41 **
 ```javascript
 ```
-** **
+**42. **
 ```javascript
 ```
-** **
+**43. **
 ```javascript
 ```
-** **
+**44. **
 ```javascript
 ```
-** **
+**45. **
 ```javascript
 ```
-** **
+**46. **
 ```javascript
 ```
-** **
+**47. **
 ```javascript
 ```
-** **
-```javascript
-```
-** **
-```javascript
-```
-** **
-```javascript
-```
-** **
-```javascript
-```
-** **
-```javascript
-```
-** **
-```javascript
-```
-** **
-```javascript
-```
-** **
-```javascript
-```
-** **
+**48. **
 ```javascript
 ```
 ** **
