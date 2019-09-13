@@ -493,7 +493,7 @@ The ```state``` property must be set to a JavaScript ```object```. Declaring it 
 ```
 this.state = {
   // describe your state here
-  }
+}
 ```
 You have access to the ```state``` object throughout the life of your component.
 You can update it, render it in your UI, and pass it as props to child components.
@@ -569,6 +569,18 @@ class MyComponent extends React.Component {
 };
 ```
 **24. React: Set State with this.setState**
+
+React provides a method for updating component ```state``` called ```setState```.
+You call the ```setState``` method within your component class like so: ```this.setState()```, 
+passing in an object with key-value pairs.
+The keys are your state properties and the values are the updated state data.
+For instance, if we were storing a ```username``` in state and wanted to update it, it would look like this:
+```
+this.setState({
+  username: 'Lewis'
+});
+```
+
 ```javascript
 ```
 **25. **
