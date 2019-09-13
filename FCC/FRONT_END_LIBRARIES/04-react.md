@@ -643,9 +643,35 @@ There are a few ways to allow your class methods to access ```this```.
 
 One common way is to explicitly bind ```this``` in the constructor so ```this``` becomes bound to the class methods when the component is initialized.
 You may have noticed the last challenge used ```this.handleClick = this.handleClick.bind(this)``` for its ```handleClick``` method in the constructor.
-Then, when you call a function like ```this.setState()``` within your class method, this refers to the class and will not be``` undefined```.
+Then, when you call a function like ```this.setState()``` within your class method, this refers to the class and will not be ```undefined```.
 
 ```javascript
+class MyComponent extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      itemCount: 0
+    };
+    // change code below this line
+    this.addItem = this.addItem.bind(this)
+    // change code above this line
+  }
+  addItem() {
+    this.setState({
+      itemCount: this.state.itemCount + 1
+    });
+  }
+  render() {
+    return (
+      <div>
+        { /* change code below this line */ }
+        <button onClick = {this.addItem}>Click Me</button>
+        { /* change code above this line */ }
+        <h1>Current Item Count: {this.state.itemCount}</h1>
+      </div>
+    );
+  }
+};
 ```
 **26. **
 ```javascript
