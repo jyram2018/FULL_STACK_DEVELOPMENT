@@ -366,6 +366,7 @@ React provides useful type-checking features to verify that components receive p
 For example, your application makes an API call to retrieve data that you expect to be in an array, which is then passed to a component as a prop. 
 
 Note: As of React v15.5.0, PropTypes is imported independently from React, like this:
+
 ```import React, { PropTypes } from 'react';```
 
 ```javascript
@@ -486,17 +487,40 @@ Camper.propTypes = {
 State consists of any data your application needs to know about, that can change over time.
 You want your apps to respond to state changes and present an updated UI when necessary.
 
-You create state in a React component by declaring a state property on the component class in its constructor.
-This initializes the component with state when it is created.
-The state property must be set to a JavaScript object. Declaring it looks like this:
-
-    this.state = {
-      // describe your state here
-    }
-
-```javascript
+You create state in a React component by declaring a ```state``` property on the component class in its ```constructor```.
+This initializes the component with ```state``` when it is created.
+The ```state``` property must be set to a JavaScript ```object```. Declaring it looks like this:
 ```
-**22. **
+this.state = {
+  // describe your state here
+  }
+```
+You have access to the ```state``` object throughout the life of your component.
+You can update it, render it in your UI, and pass it as props to child components.
+The ```state``` object can be as complex or as simple as you need it to be.
+Note that you must create a class component by extending ```React.Component``` in order to create ```state``` like this.
+```javascript
+class StatefulComponent extends React.Component {
+  constructor(props) {
+    super(props);
+    // initialize state here
+    this.state = {name: "jyram"};
+  }
+  render() {
+    return (
+      <div>
+        <h1>{this.state.name}</h1>
+      </div>
+    );
+  }
+};
+```
+**22. React: Render State in the User Interface**
+
+Note that if you make a component stateful, no other components are aware of its ```state```.
+Its ```state``` is completely encapsulated, or local to that component, unless you pass state data to a child component as ```props```.
+This notion of encapsulated ```state``` is very important because it allows you to write certain logic, then have that logic contained and isolated in one place in your code.
+
 ```javascript
 ```
 **23. **
