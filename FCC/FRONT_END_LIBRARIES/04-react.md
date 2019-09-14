@@ -715,7 +715,7 @@ class MyComponent extends React.Component {
   }
 };
 ```
-**27. <div text-decoration = "underline">React: Write a Simple Counter</div>**
+**27. <u>React: Write a Simple Counter</u>**
 
 You can design a more complex stateful component by combining the concepts covered so far.
 These include: 
