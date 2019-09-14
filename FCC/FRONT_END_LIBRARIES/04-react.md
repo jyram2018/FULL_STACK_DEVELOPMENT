@@ -673,10 +673,56 @@ class MyComponent extends React.Component {
   }
 };
 ```
-**26. **
+**26. React: Use State to Toggle an Element**
+
+You can use ```state``` in React applications in more complex ways than what you've seen so far.
+One example is to monitor the status of a value, then render the UI conditionally based on this value.
+There are several different ways to accomplish this, and the code editor shows one method.
+
 ```javascript
+class MyComponent extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      visibility: false
+    };
+    // change code below this line
+    this.toggleVisibility = this.toggleVisibility.bind(this)
+    // change code above this line
+  }
+  // change code below this line
+  toggleVisibility() {
+    this.setState({
+      visibility: !this.state.visibility
+    })
+  }
+  // change code above this line
+  render() {
+    if (this.state.visibility) {
+      return (
+        <div>
+          <button onClick={this.toggleVisibility}>Click Me</button>
+          <h1>Now you see me!</h1>
+        </div>
+      );
+    } else {
+      return (
+        <div>
+          <button onClick={this.toggleVisibility}>Click Me</button>
+        </div>
+      );
+    }
+  }
+};
 ```
-**27. **
+**27. React: Write a Simple Counter**
+
+You can design a more complex stateful component by combining the concepts covered so far.
+These include: 
+  - initializing ```state```,
+  - writing methods that set ```state```, and
+  - assigning click handlers to trigger these methods.
+
 ```javascript
 ```
 **28. **
