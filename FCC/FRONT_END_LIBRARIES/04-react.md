@@ -765,22 +765,230 @@ class Counter extends React.Component {
   }
 };
 ```
-**28. React: Create a Controlled Input**
+**28. <ins>React: Create a Controlled Input</ins>**
+
+Your application may have more complex interactions between ```state``` and the rendered UI.
+For example, form control elements for text input, such as ```input``` and ```textarea```, maintain their own state in the DOM as the user types.
+
+With React, you can move this mutable state into a React component's ```state```.
+The user's input becomes part of the application ```state```, so React controls the value of that input field.
+Typically, if you have React components with input fields the user can type into, it will be a controlled input form.
+
 ```javascript
+class ControlledInput extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      input: ''
+    };
+    // change code below this line
+    this.handleChange = this.handleChange.bind(this)
+    // change code above this line
+  }
+  // change code below this line
+  handleChange(event) {
+    this.setState({
+      input: event.target.value
+    })
+  }
+  // change code above this line
+  render() {
+    return (
+      <div>
+        { /* change code below this line */}
+        <input
+          value = {this.state.input}
+          onChange = {this.handleChange} />
+        { /* change code above this line */}
+        <h4>Controlled Input:</h4>
+        <p>{this.state.input}</p>
+      </div>
+    );
+  }
+};
 ```
-**29. **
+**29. <ins>React: Create a Controlled Form</ins>**
+
+The last challenge showed that React can control the internal state for certain elements like input and textarea, which makes them controlled components. This applies to other form elements as well, including the regular HTML form element.
+
 ```javascript
+class MyForm extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      input: '',
+      submit: ''
+    };
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+  handleChange(event) {
+    this.setState({
+      input: event.target.value
+    });
+  }
+  handleSubmit(event) {
+    // change code below this line
+    this.setState({
+      submit: this.state.input
+    });
+    event.preventDefault();
+    // change code above this line
+  }
+  render() {
+    return (
+      <div>
+        <form onSubmit={this.handleSubmit}>
+          { /* change code below this line */ }
+          <input
+            value = {this.state.input}
+            onChange = {this.handleChange}/>
+          { /* change code above this line */ }
+          <button type='submit'>Submit!</button>
+        </form>
+        { /* change code below this line */ }
+        <h1>{this.state.submit}</h1>
+        { /* change code above this line */ }
+      </div>
+    );
+  }
+};
 ```
-**30. **
+**30. React: Pass State as Props to Child Components**
 ```javascript
+class MyApp extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      name: 'CamperBot'
+    }
+  }
+  render() {
+    return (
+       <div>
+         <Navbar name = {this.state.name} />
+       </div>
+    );
+  }
+};
+
+class Navbar extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    return (
+    <div>
+      <h1>Hello, my name is: {this.props.name} </h1>
+    </div>
+    );
+  }
+};
 ```
-**31. **
+**31. React: Pass a Callback as Props**
 ```javascript
+class MyApp extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      inputValue: ''
+    }
+    this.handleChange = this.handleChange.bind(this);
+  }
+  handleChange(event) {
+    this.setState({
+      inputValue: event.target.value
+    });
+  }
+  render() {
+    return (
+       <div>
+        { /* change code below this line */ }
+        <GetInput
+          input = {this.state.inputValue}
+          handleChange = {this.handleChange} />
+        <RenderInput
+          input = {this.state.inputValue}
+          />
+        { /* change code above this line */ }
+       </div>
+    );
+  }
+};
+
+class GetInput extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    return (
+      <div>
+        <h3>Get Input:</h3>
+        <input
+          value={this.props.input}
+          onChange={this.props.handleChange}/>
+      </div>
+    );
+  }
+};
+
+class RenderInput extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    return (
+      <div>
+        <h3>Input Render:</h3>
+        <p>{this.props.input}</p>
+      </div>
+    );
+  }
+};
 ```
-**32. **
+**32. React: Use the Lifecycle Method componentWillMount**
+
+React components have several special methods that provide opportunities to perform actions at specific points in the lifecycle of a component.
+These are called lifecycle methods, or lifecycle hooks, and allow you to catch components at certain points in time.
+This can be:
+  - before they are rendered,
+  - before they update,
+  - before they receive props,
+  - before they unmount, and so on.
+Here is a list of some of the main lifecycle methods:
+
+```componentWillMount()```
+
+```componentDidMount()```
+
+```componentWillReceiveProps()```
+
+```shouldComponentUpdate()```
+
+```componentWillUpdate()```
+
+```componentDidUpdate()```
+
+```componentWillUnmount()```
+
+The ```componentWillMount()``` method is called before the ```render()``` method when a component is being mounted to the DOM.
+
 ```javascript
+class MyComponent extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  componentWillMount() {
+    // change code below this line
+    console.log("Hello")
+    // change code above this line
+  }
+  render() {
+    return <div />
+  }
+};
 ```
-**33. **
+**33. React: Use the Lifecycle Method componentDidMount**
 ```javascript
 ```
 **34. **
