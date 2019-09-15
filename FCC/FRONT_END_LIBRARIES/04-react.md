@@ -29,7 +29,6 @@ React then uses snapshots of its own DOM to optimize updating only specific part
 ```javascript
 const JSX = <h1>Hello JSX!</h1>;
 ```
-<hr/>
 **2. React: Create a Complex JSX Element**
 ```javascript
 const JSX = (
