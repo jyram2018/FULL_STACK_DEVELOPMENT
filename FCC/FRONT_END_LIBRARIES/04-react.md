@@ -29,6 +29,7 @@ React then uses snapshots of its own DOM to optimize updating only specific part
 ```javascript
 const JSX = <h1>Hello JSX!</h1>;
 ```
+<hr/>
 **2. React: Create a Complex JSX Element**
 ```javascript
 const JSX = (
@@ -955,23 +956,22 @@ This can be:
   - before they update,
   - before they receive props,
   - before they unmount, and so on.
-Here is a list of some of the main lifecycle methods:
+  
+Here is a list of some of the main lifecycle methods.
 
-```componentWillMount()```
+```componentWillMount()``` is called before the ```render()``` method when a component is being mounted to the DOM.
 
-```componentDidMount()```
+```componentDidMount()``` is called after a component is mounted to the DOM.
 
-```componentWillReceiveProps()```
+```componentWillReceiveProps()``` is called whenever a component is receiving new props. 
 
 ```shouldComponentUpdate()```
 
 ```componentWillUpdate()```
 
-```componentDidUpdate()```
+```componentDidUpdate()``` is called immediately after a component re-renders.
 
 ```componentWillUnmount()```
-
-The ```componentWillMount()``` method is called before the ```render()``` method when a component is being mounted to the DOM.
 
 ```javascript
 class MyComponent extends React.Component {
@@ -989,12 +989,85 @@ class MyComponent extends React.Component {
 };
 ```
 **33. React: Use the Lifecycle Method componentDidMount**
+
+Most web developers, at some point, need to call an API endpoint to retrieve data. If you're working with React, it's important to know where to perform this action.
+
+The best practice with React is to place API calls or any calls to your server in the lifecycle method ```componentDidMount()```. This method is called after a component is mounted to the DOM.
+Any calls to ```setState()``` here will trigger a re-rendering of your component. When you call an API in this method, and set your state with the data that the API returns, it will automatically trigger an update once you receive the data.
+
 ```javascript
+class MyComponent extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      activeUsers: null
+    };
+  }
+  componentDidMount() {
+    setTimeout( () => {
+      this.setState({
+        activeUsers: 1273
+      });
+    }, 2500);
+  }
+  render() {
+    return (
+      <div>
+        <h1>Active Users: { this.state.activeUsers }</h1>
+      </div>
+    );
+  }
+};
 ```
-**34. **
+**34. React: Add Event Listeners**
+
+The ```componentDidMount()``` method is also the best place to attach any event listeners you need to add for specific functionality. React provides a synthetic event system which wraps the native event system present in browsers. This means that the synthetic event system behaves exactly the same regardless of the user's browser - even if the native events may behave differently between different browsers.
+
+You've already been using some of these synthetic event handlers such as ```onClick()```. React's synthetic event system is great to use for most interactions you'll manage on DOM elements. However, if you want to attach an event handler to the document or window objects, you have to do this directly.
+
 ```javascript
+class MyComponent extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      message: ''
+    };
+    this.handleEnter = this.handleEnter.bind(this);
+    this.handleKeyPress = this.handleKeyPress.bind(this);
+  }
+  // change code below this line
+  componentDidMount() {
+    document.addEventListener("keydown", this.handleKeyPress)
+  }
+  componentWillUnmount() {
+    document.removeEventListener("keydown", this.handleKeyPress)
+  }
+  // change code above this line
+  handleEnter() {
+    this.setState({
+      message: this.state.message + 'You pressed the enter key! '
+    });
+  }
+  handleKeyPress(event) {
+    if (event.keyCode === 13) {
+      this.handleEnter();
+    }
+  }
+  render() {
+    return (
+      <div>
+        <h1>{this.state.message}</h1>
+      </div>
+    );
+  }
+};
 ```
-**35. **
+**35. React: Manage Updates with Lifecycle Methods**
+
+Another lifecycle method is ```componentWillReceiveProps()``` which is called whenever a component is receiving new props. This method receives the new props as an argument, which is usually written as ```nextProps```. You can use this argument and compare with ```this.props``` and perform actions before the component updates. For example, you may call ```setState()``` locally before the update is processed.
+
+Another method is ```componentDidUpdate()```, and is called immediately after a component re-renders. Note that rendering and mounting are considered different things in the component lifecycle. When a page first loads, all components are mounted and this is where methods like ```componentWillMount()``` and ```componentDidMount()``` are called. After this, as state changes, components re-render themselves. The next challenge covers this in more detail.
+
 ```javascript
 ```
 **36. **
