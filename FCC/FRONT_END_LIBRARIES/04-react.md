@@ -1078,6 +1078,49 @@ After this, as state changes, components re-render themselves.
 The next challenge covers this in more detail.
 
 ```javascript
+class Dialog extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  componentWillUpdate() {
+    console.log('Component is about to update...');
+  }
+  // change code below this line
+  componentWillReceiveProps(nextProps) {
+    console.log(this.props);
+    console.log(nextProps)
+  }
+  componentDidUpdate() {
+    console.log("Component has updated.")
+  }
+  // change code above this line
+  render() {
+    return <h1>{this.props.message}</h1>
+  }
+};
+
+class Controller extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      message: 'First Message'
+    };
+    this.changeMessage = this.changeMessage.bind(this);
+  }
+  changeMessage() {
+    this.setState({
+      message: 'Second Message'
+    });
+  }
+  render() {
+    return (
+      <div>
+        <button onClick={this.changeMessage}>Update</button>
+        <Dialog message={this.state.message}/>
+      </div>
+    );
+  }
+};
 ```
 **36. React: Optimize Re-Renders with shouldComponentUpdate**
 
@@ -1092,41 +1135,507 @@ The method must return a boolean value that tells React whether or not to update
 You can compare the current props (```this.props```) to the next props (```nextProps```) to determine if you need to update or not, and return ```true``` or ```false``` accordingly.
 
 ```javascript
+class OnlyEvens extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  shouldComponentUpdate(nextProps, nextState) {
+    console.log('Should I update?');
+     // change code below this line
+    return nextProps.value % 2 == 0 ? true : false;
+     // change code above this line
+  }
+  componentWillReceiveProps(nextProps) {
+    console.log('Receiving new props...');
+  }
+  componentDidUpdate() {
+    console.log('Component re-rendered.');
+  }
+  render() {
+    return <h1>{this.props.value}</h1>
+  }
+};
+
+class Controller extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      value: 0
+    };
+    this.addValue = this.addValue.bind(this);
+  }
+  addValue() {
+    this.setState({
+      value: this.state.value + 1
+    });
+  }
+  render() {
+    return (
+      <div>
+        <button onClick={this.addValue}>Add</button>
+        <OnlyEvens value={this.state.value}/>
+      </div>
+    );
+  }
+};
 ```
-**37. **
+**37. React: Introducing Inline Styles**
+
+JSX elements use the ```style``` attribute, but because of the way JSX is transpiled, you can't set the value to a ```string```.
+Instead, you set it equal to a JavaScript ```object```. Here's an example:
+
+```<div style={{color: "yellow", fontSize: 16}}>Mellow Yellow</div>```
+
+Notice how we camelCase the "fontSize" property?
+This is because React will not accept kebab-case keys in the style object. React will apply the correct property name for us in the HTML.
+
 ```javascript
+
+class Colorful extends React.Component {
+  render() {
+    return (
+      <div style = {{
+        color: "red",
+        fontSize: 72
+      }}>
+        Big Red
+      </div>
+    );
+  }
+};
+
 ```
-**38. **
+**38. React: Add Inline Styles in React**
 ```javascript
+const styles = {
+  color:"purple",
+  fontSize: 40,
+  border: "2px solid purple"
+}
+// change code above this line
+class Colorful extends React.Component {
+  render() {
+    // change code below this line
+    return (
+      <div style={styles}>Style Me!</div>
+    );
+    // change code above this line
+  }
+};
+
 ```
-**39. **
+**39. React: Use Advanced JavaScript in React Render Method**
 ```javascript
+const inputStyle = {
+  width: 235,
+  margin: 5
+}
+
+class MagicEightBall extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      userInput: '',
+      randomIndex: ''
+    }
+    this.ask = this.ask.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+  }
+  ask() {
+    if (this.state.userInput) {
+      this.setState({
+        randomIndex: Math.floor(Math.random() * 20),
+        userInput: ''
+      });
+    }
+  }
+  handleChange(event) {
+    this.setState({
+      userInput: event.target.value
+    });
+  }
+  render() {
+    const possibleAnswers = [
+      'It is certain',
+      'It is decidedly so',
+      'Without a doubt', 
+      'Yes, definitely',
+      'You may rely on it',
+      'As I see it, yes',
+      'Outlook good',
+      'Yes',
+      'Signs point to yes',
+      'Reply hazy try again',
+      'Ask again later',
+      'Better not tell you now',
+      'Cannot predict now',
+      'Concentrate and ask again',
+      'Don\'t count on it', 
+      'My reply is no',
+      'My sources say no',
+      'Most likely',
+      'Outlook not so good',
+      'Very doubtful'
+    ];
+    const answer = possibleAnswers[this.state.randomIndex] // << change code here
+    return (
+      <div>
+        <input
+          type="text"
+          value={this.state.userInput}
+          onChange={this.handleChange}
+          style={inputStyle} /><br />
+        <button onClick={this.ask}>
+          Ask the Magic Eight Ball!
+        </button><br />
+        <h3>Answer:</h3>
+        <p>
+          { /* change code below this line */ }
+          {answer}
+          { /* change code above this line */ }
+        </p>
+      </div>
+    );
+  }
+};
 ```
-**40 **
+**40. React: Render with an If/Else Condition**
 ```javascript
+class MyComponent extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      display: true
+    }
+    this.toggleDisplay = this.toggleDisplay.bind(this);
+  }
+  toggleDisplay() {
+    this.setState({
+      display: !this.state.display
+    });
+  }
+  render() {
+    // change code below this line
+    if (this.state.display) {
+          return (
+      <div>
+        <button onClick={this.toggleDisplay}>
+          Toggle Display
+        </button>
+        <h1>Displayed!</h1>
+      </div>
+      );
+    }
+    else {
+          return (
+      <div>
+        <button onClick={this.toggleDisplay}>
+          Toggle Display</button>
+      </div>
+    );
+    }
+  }
+};
 ```
-**41 **
+**41. React: Use && for a More Concise Conditional**
 ```javascript
+class MyComponent extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      display: true
+    }
+    this.toggleDisplay = this.toggleDisplay.bind(this);
+  }
+  toggleDisplay() {
+    this.setState({
+      display: !this.state.display
+    });
+  }
+  render() {
+    // change code below this line
+    return (
+      <div>
+        <button onClick={this.toggleDisplay}>
+          Toggle Display
+        </button>
+        {this.state.display &&<h1>Displayed!</h1>}
+      </div>
+    );
+  }
+};
 ```
-**42. **
+**42. React: Use a Ternary Expression for Conditional Rendering**
 ```javascript
+
+const inputStyle = {
+  width: 235,
+  margin: 5
+}
+
+class CheckUserAge extends React.Component {
+  constructor(props) {
+    super(props);
+    // change code below this line
+    this.state = {
+      input: "",
+      userAge: ""
+    }
+    // change code above this line
+    this.submit = this.submit.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+  }
+  handleChange(e) {
+    this.setState({
+      input: e.target.value,
+      userAge: ''
+    });
+  }
+  submit() {
+    this.setState({
+      userAge: this.state.input
+    });
+  }
+  render() {
+    const buttonOne = <button onClick={this.submit}>Submit</button>;
+    const buttonTwo = <button>You May Enter</button>;
+    const buttonThree = <button>You Shall Not Pass</button>;
+    return (
+      <div>
+        <h3>Enter Your Age to Continue</h3>
+        <input
+          style={inputStyle}
+          type="number"
+          value={this.state.input}
+          onChange={this.handleChange} /><br />
+        {
+          !this.state.userAge ?
+          buttonOne :
+            this.state.userAge < 18 ?
+            buttonThree :
+            buttonTwo
+        }
+      </div>
+    );
+  }
+};
 ```
-**43. **
+**43. <ins>React: Render Conditionally from Props</ins>**
 ```javascript
+class Results extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    return (
+      <h1>
+      {
+        this.props.fiftyFifty ?
+        "You win!" : "You lose!"
+      }
+      </h1>
+    )
+  };
+};
+
+class GameOfChance extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      counter: 1
+    }
+    this.handleClick = this.handleClick.bind(this);
+  }
+  handleClick() {
+    this.setState({
+      counter: this.state.counter + 1 // change code here
+    });
+  }
+  render() {
+    let expression = Math.random() > .5; // change code here
+    return (
+      <div>
+        <button onClick={this.handleClick}>Play Again</button>
+        { /* change code below this line */ }
+        <Results fiftyFifty = {expression}/>
+        { /* change code above this line */ }
+        <p>{'Turn: ' + this.state.counter}</p>
+      </div>
+    );
+  }
+};
 ```
-**44. **
+**44. React: Change Inline CSS Conditionally Based on Component State**
 ```javascript
+
+class GateKeeper extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      input: ''
+    };
+    this.handleChange = this.handleChange.bind(this);
+  }
+  handleChange(event) {
+    this.setState({ input: event.target.value })
+  }
+  render() {
+    let inputStyle = {
+      border: '1px solid black'
+    };
+    // change code below this line
+    this.state.input.length > 15 ?
+    inputStyle.border = "3px solid red" : ""
+    // change code above this line
+    return (
+      <div>
+        <h3>Don't Type Too Much:</h3>
+        <input
+          type="text"
+          style={inputStyle}
+          value={this.state.input}
+          onChange={this.handleChange} />
+      </div>
+    );
+  }
+};
 ```
-**45. **
+**45. <ins>React: Use Array.map() to Dynamically Render Elements</ins>**
 ```javascript
+const textAreaStyles = {
+  width: 235,
+  margin: 5
+};
+
+class MyToDoList extends React.Component {
+  constructor(props) {
+    super(props);
+    // change code below this line
+    this.state = {
+      userInput: "",
+      toDoList: []
+    }
+    // change code above this line
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+  }
+  handleSubmit() {
+    const itemsArray = this.state.userInput.split(',');
+    this.setState({
+      toDoList: itemsArray
+    });
+  }
+  handleChange(e) {
+    this.setState({
+      userInput: e.target.value
+    });
+  }
+  render() {
+    const items = this.state.toDoList.map(
+      x => <li>{x}</li>
+    )
+    return (
+      <div>
+        <textarea
+          onChange={this.handleChange}
+          value={this.state.userInput}
+          style={textAreaStyles}
+          placeholder="Separate Items With Commas" /><br />
+        <button onClick={this.handleSubmit}>Create List</button>
+        <h1>My "To Do" List:</h1>
+        <ul>
+          {items}
+        </ul>
+      </div>
+    );
+  }
+};
 ```
-**46. **
+**46. React: Give Sibling Elements a Unique Key Attribute**
+
+When you create an array of elements, each one needs a ```key``` attribute set to a unique value.
+React uses these keys to keep track of which items are added, changed, or removed.
+This helps make the re-rendering process more efficient when the list is modified in any way.
+Note that keys only need to be unique between sibling elements, they don't need to be globally unique in your application.
+
 ```javascript
+
+const frontEndFrameworks = [
+  'React',
+  'Angular',
+  'Ember',
+  'Knockout',
+  'Backbone',
+  'Vue'
+];
+
+function Frameworks() {
+  const renderFrameworks = frontEndFrameworks.map(
+    (x, y) => <li key = {y + x}>{x}</li>
+  ); // change code here
+  return (
+    <div>
+      <h1>Popular Front End JavaScript Frameworks</h1>
+      <ul>
+        {renderFrameworks}
+      </ul>
+    </div>
+  );
+};
 ```
-**47. **
+**47. <ins>React: Use Array.filter() to Dynamically Filter an Array</ins>**
 ```javascript
+class MyComponent extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      users: [
+        {
+          username: 'Jeff',
+          online: true
+        },
+        {
+          username: 'Alan',
+          online: false
+        },
+        {
+          username: 'Mary',
+          online: true
+        },
+        {
+          username: 'Jim',
+          online: false
+        },
+        {
+          username: 'Sara',
+          online: true
+        },
+        {
+          username: 'Laura',
+          online: true
+        }
+      ]
+    }
+  }
+  render() {
+    const usersOnline = this.state.users.filter(
+      x => x.online == true
+    ); // change code here
+    const renderOnline = usersOnline.map(
+      (x, y) => <li key = {y + x.username}>{x.username}</li>
+    ); // change code here
+    return (
+       <div>
+         <h1>Current Online Users:</h1>
+         <ul>
+           {renderOnline}
+         </ul>
+       </div>
+    );
+  }
+};
 ```
-**48. **
+**48. React: Render React on the Server with renderToString**
 ```javascript
 ```
 ** **
