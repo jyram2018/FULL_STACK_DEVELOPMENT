@@ -21,6 +21,7 @@ The transpiler Babel is a popular tool for this process.
 It's already added behind the scenes for these challenges. 
 It's worth noting that under the hood the challenges are calling
 ```
+
 ReactDOM.render(JSX, document.getElementById('root'));
 ```
 This function call is what places your JSX into React's own lightweight representation of the DOM.
@@ -1647,46 +1648,16 @@ There are two key reasons why rendering on the server may be used in a real worl
 - Second, this creates a faster initial page load experience because the rendered HTML is smaller than the JavaScript code of the entire app. React will still be able to recognize your app and manage it after the initial load.
 
 ```javascript
-```
-** **
-```javascript
-```
-** **
-```javascript
-```
-** **
-```javascript
-```
-** **
-```javascript
-```
-** **
-```javascript
-```
-** **
-```javascript
-```
-** **
-```javascript
-```
-** **
-```javascript
-```
-** **
-```javascript
-```
-** **
-```javascript
-```
-** **
-```javascript
-```
-** **
-```javascript
-```
-** **
-```javascript
-```
-** **
-```javascript
+
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    return <div/>
+  }
+};
+
+// change code below this line
+ReactDOMServer.renderToString(<App/>);
 ```
