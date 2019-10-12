@@ -75,6 +75,7 @@ const loginAction = () => {
 store.dispatch(loginAction());
 ```
 **6. Redux: Handle an Action in the Store**
+
 After an action is created and dispatched, the Redux store needs to know how to respond to that action.
 This is the job of a reducer function.
 Reducers in Redux are responsible for the state modifications that take place in response to actions.
