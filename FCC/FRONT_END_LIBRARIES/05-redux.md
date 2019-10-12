@@ -119,8 +119,38 @@ You represent this with a single state object with the property ```authenticated
 You also need action creators that create actions corresponding to user login and user logout, along with the action objects themselves.
 
 ```javascript
+const defaultState = {
+  authenticated: false
+};
+
+const authReducer = (state = defaultState, action) => {
+  // change code below this line
+  switch (action.type) {
+    case 'LOGIN':
+      return {authenticated: true};
+    case 'LOGOUT':
+      return {authenticated: false};
+    default:
+      return state;
+  }
+  // change code above this line
+};
+
+const store = Redux.createStore(authReducer);
+
+const loginUser = () => {
+  return {
+    type: 'LOGIN'
+  }
+};
+
+const logoutUser = () => {
+  return {
+    type: 'LOGOUT'
+  }
+};
 ```
-** **
+**8. Redux: Use const for Action Types**
 ```javascript
 ```
 ** **
