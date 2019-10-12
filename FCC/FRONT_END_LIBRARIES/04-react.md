@@ -975,7 +975,6 @@ Here is a list of some of the main lifecycle methods.
 
 Below a React Component Lifecycle Visual.
 
-![React Component Lifecycle Visual](https://cdn-images-1.medium.com/max/2000/1*sn-ftowp0_VVRbeUAFECMA.png)
 <img src="https://cdn-images-1.medium.com/max/2000/1*sn-ftowp0_VVRbeUAFECMA.png" alt="React Component Lifecycle Visual" width="100%" height="100%" />
 
 ```javascript
