@@ -207,8 +207,37 @@ This allows you to subscribe listener functions to the store, which are called w
 One simple use for this method is to subscribe a function to your store that simply logs a message every time an action is received and the store is updated.
 
 ```javascript
+const ADD = 'ADD';
+
+const reducer = (state = 0, action) => {
+  switch(action.type) {
+    case ADD:
+      return state + 1;
+    default:
+      return state;
+  }
+};
+
+const store = Redux.createStore(reducer);
+
+// global count variable:
+let count = 0;
+
+// change code below this line
+const counter = () => {
+  reducer == 0 ? "" : count += 1;
+};
+store.subscribe(counter);
+// change code above this line
+
+store.dispatch({type: ADD});
+console.log(count);
+store.dispatch({type: ADD});
+console.log(count);
+store.dispatch({type: ADD});
+console.log(count);
 ```
-** **
+**10. Redux: Combine Multiple ReducersPassed**
 ```javascript
 ```
 ** **
