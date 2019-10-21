@@ -255,18 +255,59 @@ Typically, it is a good practice to create a reducer for each piece of applicati
 For example, in a note-taking app with user authentication, one reducer could handle authentication while another handles the text and notes that the user is submitting.
 For such an application, we might write the ```combineReducers()``` method like this:
 
-  const rootReducer = Redux.combineReducers({
-    auth: authenticationReducer,
-    notes: notesReducer
-  });
+```
+const rootReducer = Redux.combineReducers({
+  auth: authenticationReducer,
+  notes: notesReducer
+});
+```
 
 Now, the key ```notes``` will contain all of the state associated with our ```notes``` and handled by our ```notesReducer```.
 This is how multiple reducers can be composed to manage more complex application state.
 In this example, the state held in the Redux store would then be a single object containing ```auth``` and ```notes``` properties.
 
 ```javascript
+const INCREMENT = 'INCREMENT';
+const DECREMENT = 'DECREMENT';
+
+const counterReducer = (state = 0, action) => {
+  switch(action.type) {
+    case INCREMENT:
+      return state + 1;
+    case DECREMENT:
+      return state - 1;
+    default:
+      return state;
+  }
+};
+
+const LOGIN = 'LOGIN';
+const LOGOUT = 'LOGOUT';
+
+const authReducer = (state = {authenticated: false}, action) => {
+  switch(action.type) {
+    case LOGIN:
+      return {
+        authenticated: true
+      }
+    case LOGOUT:
+      return {
+        authenticated: false
+      }
+    default:
+      return state;
+  }
+};
+
+// define the root reducer here
+const rootReducer = Redux.combineReducers({
+  count: counterReducer,
+  auth: authReducer
+});
+
+const store = Redux.createStore(rootReducer);
 ```
-** **
+**11. Redux: Send Action Data to the StorePassed**
 ```javascript
 ```
 ** **
