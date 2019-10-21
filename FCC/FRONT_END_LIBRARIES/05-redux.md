@@ -237,7 +237,7 @@ console.log(count);
 store.dispatch({type: ADD});
 console.log(count);
 ```
-**10. Redux: Combine Multiple ReducersPassed**
+**10. Redux: Combine Multiple Reducers**
 
 When the state of your app begins to grow more complex, it may be tempting to divide state into multiple pieces.
 
@@ -307,7 +307,7 @@ const rootReducer = Redux.combineReducers({
 
 const store = Redux.createStore(rootReducer);
 ```
-**11. Redux: Send Action Data to the StorePassed**
+**11. Redux: Send Action Data to the Store**
 ```javascript
 ```
 ** **
