@@ -343,6 +343,13 @@ store.dispatch(addNoteText('Hello!'));
 console.log(store.getState());
 ```
 **12. Redux: Use Middleware to Handle Asynchronous Actions**
+
+So far these challenges have avoided discussing asynchronous actions, but they are an unavoidable part of web development. At some point you'll need to call asynchronous endpoints in your Redux app, so how do you handle these types of requests? Redux provides middleware designed specifically for this purpose, called Redux Thunk middleware. Here's a brief description how to use this with Redux.
+
+To include Redux Thunk middleware, you pass it as an argument to ```Redux.applyMiddleware()```. This statement is then provided as a second optional parameter to the ```createStore()``` function.
+
+Then, to create an asynchronous action, you return a function in the action creator that takes ```dispatch``` as an argument. Within this function, you can dispatch actions and perform asynchronous requests.
+
 ```javascript
 ```
 ** **
