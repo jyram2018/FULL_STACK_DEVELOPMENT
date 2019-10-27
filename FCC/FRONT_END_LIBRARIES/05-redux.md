@@ -342,7 +342,7 @@ console.log(store.getState());
 store.dispatch(addNoteText('Hello!'));
 console.log(store.getState());
 ```
-** **
+**12. Redux: Use Middleware to Handle Asynchronous Actions**
 ```javascript
 ```
 ** **
