@@ -405,7 +405,30 @@ Now you've learned all the core principles of Redux! You've seen how to create a
 These examples are simplistic, but these concepts are the core principles of Redux. If you understand them well, you're ready to start building your own Redux app. The next challenges cover some of the details regarding ```state``` immutability, but first, here's a review of everything you've learned so far.
 
 ```javascript
+const INCREMENT = "INCREMENT"; // define a constant for increment action types
+const DECREMENT = "DECREMENT"; // define a constant for decrement action types
+
+const counterReducer = (state = 0, action) => {
+    switch(action.type) {
+        case INCREMENT:
+            return state + 1;
+        case DECREMENT:
+            return state - 1;
+        default:
+            return state;
+    }
+}; // define the counter reducer which will increment or decrement the state based on the action it receives
+
+const incAction = () => {
+    return {type: INCREMENT};
+}; // define an action creator for incrementing
+
+const decAction = () => {
+    return {type: DECREMENT};
+}; // define an action creator for decrementing
+
+const store = Redux.createStore(counterReducer); // define the Redux store here, passing in your reducers
 ```
-** **
+**14. Redux: Never Mutate State**
 ```javascript
 ```
