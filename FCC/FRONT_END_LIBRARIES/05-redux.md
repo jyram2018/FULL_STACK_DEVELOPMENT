@@ -454,7 +454,7 @@ const immutableReducer = (state = todos, action) => {
   switch(action.type) {
     case ADD_TO_DO:
       // don't mutate state here or the tests will fail
-      return todos.concat(action.todo);
+      return state.concat(action.todo);
     default:
       return state;
   }
@@ -467,6 +467,101 @@ const addToDo = (todo) => {
     todo
   }
 }
+
+const store = Redux.createStore(immutableReducer);
+```
+**15. Redux: Use the Spread Operator on Arrays**
+
+One solution from ES6 to help enforce state immutability in Redux is the spread operator: ```...```. The spread operator has a variety of applications, one of which is well-suited to the previous challenge of producing a new array from an existing array. This is relatively new, but commonly used syntax. For example, if you have an array ```myArray``` and write:
+
+```let newArray = [...myArray];```
+
+```newArray``` is now a clone of ```myArray```. Both arrays still exist separately in memory. If you perform a mutation like ```newArray.push(5)```, ```myArray``` doesn't change. The ```...``` effectively spreads out the values in ```myArray``` into a new array.
+
+To clone an array but add additional values in the new array, you could write ```[...myArray, 'new value']```. This would return a new array composed of the values in ```myArray``` and the string ```'new value'``` as the last value.
+
+The spread syntax can be used multiple times in array composition like this, but it's important to note that it only makes a shallow copy of the array. That is to say, it only provides immutable array operations for one-dimensional arrays.
+
+```javascript
+const immutableReducer = (state = ['Do not mutate state!'], action) => {
+  switch(action.type) {
+    case 'ADD_TO_DO':
+      // don't mutate state here or the tests will fail
+      return [...state, action.todo]
+    default:
+      return state;
+  }
+};
+
+const addToDo = (todo) => {
+  return {
+    type: 'ADD_TO_DO',
+    todo
+  }
+}
+
+const store = Redux.createStore(immutableReducer);
+```
+**16. Redux: Remove an Item from an Array**
+
+Time to practice removing items from an array. The spread operator can be used here as well. Other useful JavaScript methods include ```slice()``` and ```concat()```.
+
+```javascript
+const immutableReducer = (state = [0,1,2,3,4,5], action) => {
+  switch(action.type) {
+    case 'REMOVE_ITEM':
+      // don't mutate state here or the tests will fail
+      return state.slice(0, action.index)
+        .concat(state.slice(action.index + 1))
+    default:
+      return state;
+  }
+};
+
+const removeItem = (index) => {
+  return {
+    type: 'REMOVE_ITEM',
+    index
+  }
+}
+
+const store = Redux.createStore(immutableReducer);
+```
+**17. Redux: Copy an Object with Object.assign**
+
+The last several challenges worked with arrays, but there are ways to help enforce state immutability when state is an ```object```, too. A useful tool for handling objects is the ```Object.assign()``` utility.
+
+```Object.assign()``` takes a target object and source objects and maps properties from the source objects to the target object. Any matching properties are overwritten by properties in the source objects. This behavior is commonly used to make shallow copies of objects by passing an empty object as the first argument followed by the object(s) you want to copy.
+
+Here's an example:
+
+```const newObject = Object.assign({}, obj1, obj2);```
+
+This creates ```newObject``` as a new ```object```, which contains the properties that currently exist in ```obj1``` and ```obj2```.
+
+```javascript
+const defaultState = {
+  user: 'CamperBot',
+  status: 'offline',
+  friends: '732,982',
+  community: 'freeCodeCamp'
+};
+
+const immutableReducer = (state = defaultState, action) => {
+  switch(action.type) {
+    case 'ONLINE':
+      // don't mutate state here or the tests will fail
+      return Object.assign({}, state, {status: 'online'})
+    default:
+      return state;
+  }
+};
+
+const wakeUp = () => {
+  return {
+    type: 'ONLINE'
+  }
+};
 
 const store = Redux.createStore(immutableReducer);
 ```
