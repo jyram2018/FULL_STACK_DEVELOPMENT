@@ -14,13 +14,13 @@ Although React components can manage their own state locally, when you have a co
 
 Finally, because Redux is not designed to work with React out of the box, you need to use the ```react-redux``` package. It provides a way for you to pass Redux ```state``` and ```dispatch``` to your React components as ```props```.
 
-Over the next few challenges,
+Over the next few challenges:
 <ul>
-<li>first, you'll create a simple React component which allows you to input new text messages. These are added to an array that's displayed in the view. This should be a nice review of what you learned in the React lessons.</li>
+<li>First, you'll create a simple React component which allows you to input new text messages. These are added to an array that's displayed in the view. This should be a nice review of what you learned in the React lessons.</li>
 
-Next, you'll create a Redux store and actions that manage the state of the messages array.
+<li>Next, you'll create a Redux store and actions that manage the state of the messages array.</li>
 
-Finally, you'll use ```react-redux``` to connect the Redux store with your component, thereby extracting the local state into the Redux store.
+<li>Finally, you'll use ```react-redux``` to connect the Redux store with your component, thereby extracting the local state into the Redux store.</li>
 </ul>
 
 ```javascript
