@@ -419,9 +419,9 @@ class ShoppingCart extends React.Component {
 ```
 **19. React: Access Props Using this.props**
 
-Anytime you refer to a class component within itself, you use the this keyword.
-To access props within a class component, you preface the code that you use to access it with this.
-For example, if an ES6 class component has a prop called data, you write ```{this.props.data}``` in JSX.
+Anytime you refer to a class component within itself, you use the ```this``` keyword.
+To access props within a class component, you preface the code that you use to access it with ```this```.
+For example, if an ES6 class component has a prop called ```data```, you write ```{this.props.data}``` in JSX.
 
 ```javascript
 class ReturnTempPassword extends React.Component {
