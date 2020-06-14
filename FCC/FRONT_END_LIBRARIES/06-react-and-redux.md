@@ -39,7 +39,7 @@ class DisplayMessages extends React.Component {
 };
 ```
 
-**2. **
+**2. React and Redux: Manage State Locally First**
 
 ```javascript
 ```
