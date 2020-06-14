@@ -23,6 +23,20 @@ Next, you'll create a Redux store and actions that manage the state of the messa
 Finally, you'll use ```react-redux``` to connect the Redux store with your component, thereby extracting the local state into the Redux store.
 
 ```javascript
+class DisplayMessages extends React.Component {
+  // change code below this line
+  constructor(props) {
+    super(props);
+    this.state = {
+      input: "",
+      messages: []
+    };
+  }
+  // change code above this line
+  render() {
+    return <div />
+  }
+};
 ```
 
 **2. **
