@@ -42,9 +42,55 @@ class DisplayMessages extends React.Component {
 **2. React and Redux: Manage State Locally First**
 
 ```javascript
+class DisplayMessages extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      input: '',
+      messages: []
+    }
+    this.handleChange = this.handleChange.bind(this)
+    this.submitMessage = this.submitMessage.bind(this)
+  }
+  
+  // add handleChange() and submitMessage() methods here
+  handleChange(event) {
+    this.setState({
+      input : event.target.value
+    });
+  }
+  submitMessage() {
+    this.setState({
+      input : "",
+      messages: this.state.messages
+        .concat(this.state.input)
+    });
+  }
+
+  render() {
+    return (
+      <div>
+        <h2>Type in a new Message:</h2>
+        { /* render an input, button, and ul here */ }
+          <input 
+          onChange={this.handleChange}
+          value={this.state.input}
+          />
+          <button onClick={this.submitMessage}>
+          Click Me
+          </button>
+          <ul>
+            {this.state.messages.map(
+              (x) => <li>{x}</li>)}
+          </ul>
+        { /* change code above this line */ }
+      </div>
+    );
+  }
+};
 ```
 
-**3. **
+**3. React and Redux: Extract State Logic to Redux**
 
 ```javascript
 ```
