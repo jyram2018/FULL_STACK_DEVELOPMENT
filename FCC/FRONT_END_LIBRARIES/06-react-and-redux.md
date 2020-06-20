@@ -307,5 +307,11 @@ const connect = ReactRedux.connect;
 const ConnectedComponent = connect(mapStateToProps, mapDispatchToProps)(Presentational)
 ```
 
+**8. React and Redux: Connect Redux to the Messages App**
+
+Now that you understand how to use connect to connect React to Redux, you can apply what you've learned to your React component that handles messages.
+
+In the last lesson, the component you connected to Redux was named ```Presentational```, and this wasn't arbitrary. This term generally refers to React components that are not directly connected to Redux. They are simply responsible for the presentation of UI and do this as a function of the props they receive. By contrast, container components are connected to Redux. These are typically responsible for dispatching actions to the store and often pass store state to child components as props.
+
 ```javascript
 ```
